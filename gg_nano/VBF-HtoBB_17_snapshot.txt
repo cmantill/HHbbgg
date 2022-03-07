@@ -1,0 +1,17 @@
+root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_VBF-HtoBB_17_10of17.root
+root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_VBF-HtoBB_17_11of17.root
+root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_VBF-HtoBB_17_12of17.root
+root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_VBF-HtoBB_17_13of17.root
+root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_VBF-HtoBB_17_14of17.root
+root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_VBF-HtoBB_17_15of17.root
+root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_VBF-HtoBB_17_16of17.root
+root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_VBF-HtoBB_17_17of17.root
+root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_VBF-HtoBB_17_1of17.root
+root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_VBF-HtoBB_17_2of17.root
+root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_VBF-HtoBB_17_3of17.root
+root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_VBF-HtoBB_17_4of17.root
+root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_VBF-HtoBB_17_5of17.root
+root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_VBF-HtoBB_17_6of17.root
+root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_VBF-HtoBB_17_7of17.root
+root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_VBF-HtoBB_17_8of17.root
+root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_VBF-HtoBB_17_9of17.root

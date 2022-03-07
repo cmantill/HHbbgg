@@ -1,0 +1,10 @@
+*.png
+*.pdf
+*~
+*pyc
+logs/
+*.root
+condor_submit_debug.log
+docker_stderror
+CondorHelper.py
+*.tgz
