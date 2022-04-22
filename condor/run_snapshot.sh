@@ -26,4 +26,4 @@ echo python HHSnapshot.py $*
 python HHSnapshot.py $*
 
 xrdcp -f HHsnapshot_*.root root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/
-
+xrdcp -f HHcutflow_*.txt root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/cutflows/

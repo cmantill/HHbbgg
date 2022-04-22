@@ -1,6 +1,7 @@
 {
     "lumi16":35917.213466,
-    "lumi17":41521.427777,
+    "lumi17only":41521.427777,
+    "lumi17":137131.33,
     "lumi18":59692.687741,
     "XSECS":{
 	"GJetsHT100-200": 5000,
@@ -24,11 +25,18 @@
 	"TTTo2L2Nu": 92.23,
         "TTToSemiLeptonic": 369.5,
         "TTToHadronic": 370,
-	"HHbbgg-cHH1": 1,
-	"NMSSM-XToYHTo2g2b-MX-1200MY400": 1e-3,
-        "NMSSM-XToYHTo2g2b-MX-1200MY60": 1e-3,
+	"HHbbgg-cHH1": 0.000041,
+	"NMSSM-XToYHTo2g2b-MX-1200MY10": 1e-3,
+	"NMSSM-XToYHTo2g2b-MX-1200MY20": 1e-3,
+	"NMSSM-XToYHTo2g2b-MX-1200MY40": 1e-3,
+	"NMSSM-XToYHTo2g2b-MX-1200MY60": 1e-3,
 	"NMSSM-XToYHTo2g2b-MX-1200MY125": 1e-3,
-	"NMSSM-XToYHTo2g2b-MX-1200MY300": 1e-3
+        "NMSSM-XToYHTo2g2b-MX-1200MY250": 1e-3,
+	"NMSSM-XToYHTo2g2b-MX-1200MY300": 1e-3,
+	"NMSSM-XToYHTo2g2b-MX-1200MY400": 1e-3,
+	"NMSSM-XToYHTo2g2b-MX-2000MY5": 1e-3,
+	"NMSSM-XToYHTo2g2b-MX-2000MY10": 1e-3,
+	"NMSSM-XToYHTo2g2b-MX-2000MY20": 1e-3
     },
     "CUTS":{
         "XbbvsQCD": 0.8,

@@ -1,0 +1,1 @@
+root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_NMSSM-XToYHTo2g2b-MX-1200MY300_17_1of1.root

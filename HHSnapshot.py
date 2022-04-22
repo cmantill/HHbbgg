@@ -30,5 +30,6 @@ selection = HHClass('raw_nano/%s_%s.txt'%(args.setname,args.era),int(args.era),a
 selection.ApplyKinematicsSnap()
 out = selection.ApplyStandardCorrections(snapshot=True)
 selection.Snapshot(out)
-selection.GetCutflow()
+selection.GetCutflow("HHcutflow_%s_%s_%iof%i.txt"%(args.setname,args.era,args.ijob,args.njobs))
+
 print ('%s sec'%(time.time()-start))

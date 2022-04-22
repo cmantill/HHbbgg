@@ -1,0 +1,1 @@
+{"Initial": 248000.0, "flags": 241114.0, "n_photon": 228532.0, "njets": 222275.0, "photon0_away": 78625.0, "photon1_away": 60716.0, "photon0_pt": 53156.0, "photon1_pt": 38811.0, "fatjet_pt": 23126.0, "ptphoton_over_mgg": 23126, "nobtagsaway": 10243, "metcut": 9984, "deltar": 9984, "SelFatJet_Xbb_tight": 9128}

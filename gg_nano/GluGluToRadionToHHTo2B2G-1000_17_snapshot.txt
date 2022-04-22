@@ -1,0 +1,2 @@
+root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_GluGluToRadionToHHTo2B2G-1000_17_1of2.root
+root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_GluGluToRadionToHHTo2B2G-1000_17_2of2.root
