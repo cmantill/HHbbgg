@@ -130,9 +130,7 @@ def multicore(infiles=[],doStudies=True):
     print ('Total multicore time: %s'%(time.time()-start))                                    
 
 def plot(tag,histname,fancyname,year='16'):
-    files = [f for f in glob('rootfiles/%s/HHstudies_*_%s.root'%(tag,year)) if (('_GJets_' in f) or ('_ttbar_' in f) or ('NMSSM-XToYHTo2g2b-MX-1200MY400' in f))]
-    #files = [f for f in glob('rootfiles/%s/HHstudies_*_%s.root'%(tag,year)) if (('_GJets_' in f) or ('_TTTo2L' in f) or ('_TTToSemi' in f) or ('_TTToHad' in f) or ('NMSSM-XToYHTo2g2b' in f) or ('HHbbgg-cHH1' in f))]
-    #print(files)
+    files = [f for f in glob('rootfiles/%s/HHstudies_*_%s.root'%(tag,year)) if (('_GJets_' in f) or ('_ttbar_' in f) or ('NMSSM-XToYHTo2g2b-MX-1200MY125' in f))]
     hists = GetHistDict(histname,files)
 
     yearname = year
@@ -261,10 +259,10 @@ if __name__ == '__main__':
         CombineCommonSets(args.tag,'GJets',True)
         CombineCommonSets(args.tag,'ttbar',True)
         CombineCommonSets(args.tag,'Hbb',True)
-        CombineCommonSets(args.tag,'QCD',True)
+        #CombineCommonSets(args.tag,'QCD',True)
 
     histNames = {
-        #'mgg':'DiPhoton invariant mass m_{#gamma#gamma} (GeV)',
+        'mgg':'DiPhoton invariant mass m_{#gamma#gamma} (GeV)',
         'ptgg_over_inv':'p_{T}^{#gamma#gamma}/M_{j#gamma#gamma}',
         'pt0': 'Lead photon p_{T} (GeV)',
         'pt0_over_mgg':'p_{T}^{#gamma_{0}}/m_{#gamma#gamma}',
@@ -290,12 +288,11 @@ if __name__ == '__main__':
     import os
     os.system('mkdir -p plots/%s/'%args.tag)
 
-    tempFile = ROOT.TFile.Open('rootfiles/%s/HHstudies_NMSSM-XToYHTo2g2b-MX-1200MY400_17.root'%args.tag,'READ')
+    tempFile = ROOT.TFile.Open('rootfiles/%s/HHstudies_NMSSM-XToYHTo2g2b-MX-1200MY125_17.root'%args.tag,'READ')
     allValidationHists = [k.GetName() for k in tempFile.GetListOfKeys() if 'Idx' not in k.GetName()]
     for h in allValidationHists:
-        print ('Plotting: %s'%h)
         if h in histNames.keys():
-            #print(h)
+            print ('Plotting: %s'%h)
             #plot_signals(h,histNames[h],'17',mx='1200')
             plot_sig_bkg(args.tag,h,histNames[h],year='17',sig=True,bkg=True)
             plot_sig_bkg(args.tag,h,histNames[h],year='17',sig=True,bkg=False)

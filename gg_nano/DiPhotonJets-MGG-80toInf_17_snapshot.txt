@@ -1,12 +1,4 @@
-root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_DiPhotonJets-MGG-80toInf_17_11of14.root
-root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_DiPhotonJets-MGG-80toInf_17_12of14.root
-root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_DiPhotonJets-MGG-80toInf_17_13of14.root
-root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_DiPhotonJets-MGG-80toInf_17_14of14.root
-root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_DiPhotonJets-MGG-80toInf_17_1of14.root
-root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_DiPhotonJets-MGG-80toInf_17_2of14.root
-root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_DiPhotonJets-MGG-80toInf_17_3of14.root
-root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_DiPhotonJets-MGG-80toInf_17_5of14.root
-root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_DiPhotonJets-MGG-80toInf_17_6of14.root
-root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_DiPhotonJets-MGG-80toInf_17_7of14.root
-root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_DiPhotonJets-MGG-80toInf_17_8of14.root
-root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_DiPhotonJets-MGG-80toInf_17_9of14.root
+root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_DiPhotonJets-MGG-80toInf_17_1of4.root
+root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_DiPhotonJets-MGG-80toInf_17_2of4.root
+root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_DiPhotonJets-MGG-80toInf_17_3of4.root
+root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_DiPhotonJets-MGG-80toInf_17_4of4.root

@@ -47,24 +47,36 @@ def HHstudies(args):
     selection.a.Define("p1_mva", "SelPhoton_mvaID[1]")
     selection.a.Define("ptj", "SelFatJet_pt[fatjet_index]")
     selection.a.Define("pt0", "SelPhoton_pt[0]")
+    # selection.a.Define("mreg", "SelFatJet_mreg[fatjet_index]")
     selection.a.Define("mjet", "SelFatJet_msoftdrop[fatjet_index]")
     selection.a.Define("invm", "hardware::InvariantMass({fatjet,lead_photon,sublead_photon})")
     selection.a.Define("redm", "invm-mjet-mgg+{0}".format(selection.mh))
     selection.a.Define("pt0_over_mj", "SelFatJet_pt[fatjet_index]/mjet")
     selection.a.Define("ptgg_over_inv", "(lead_photon+sublead_photon).Pt()/invm")
     selection.a.Define("ptj_over_inv", "SelFatJet_pt[fatjet_index]/invm")
-
-    #selection.a.Cut('photonsawayjet',"deltaR_fatjet_photon0>0.4 && deltaR_fatjet_photon1>0.4")
+        
     selection.a.Cut("photonsawayjet", "dr_fj_p0>1. && dr_fj_p1>0.8")
     selection.a.Cut("nobtagsaway", "bscore_jetaway < 0.340")
     selection.a.Cut("SelFatJet_Xbb_tight","SelFatJet_Xbb[0]>0.9")
+    
+    #if selection.a.isData:
+    # selection.a.Cut("mbb_veto", "SelFatJet_mreg[fatjet_index]<90 || SelFatJet_mreg[fatjet_index]>150")
+    #selection.a.Cut("mbb_veto", "SelFatJet_msoftdrop[fatjet_index]<90 || SelFatJet_msoftdrop[fatjet_index]>150")
+
+    selection.a.Cut("mbb_window", "SelFatJet_msoftdrop[fatjet_index]>90 && SelFatJet_msoftdrop[fatjet_index]<150")
+    if selection.a.isData:
+        selection.a.Cut("mgg_veto", "(mgg < %s) || (mgg > %s)"%(args.mass-20,args.mass+20))
+
+    #else:
+    # selection.a.Cut("mbb_window", "SelFatJet_mreg[fatjet_index]>90 && SelFatJet_mreg[fatjet_index]<150")
+    #selection.a.Cut("mbb_window", "SelFatJet_msoftdrop[fatjet_index]>90 && SelFatJet_msoftdrop[fatjet_index]<150")
 
     try:
-        xsecscale = selection.GetXsecScale()
-        selection.a.MakeWeightCols(extraNominal='' if selection.a.isData else 'genWeight*%s'%xsecscale)
+        selection.a.MakeWeightCols(extraNominal='' if selection.a.isData else 'genWeight*%s'%selection.GetXsecScale())
     except:
+        print('no xsec')
         exit(1)
-
+        
     selection.a.Snapshot(["mjet","deta_p0_p1","dphi_p0_p1","dr_p0_p1","mgg","weight__nominal",],'selfiles/%s/%s_%s.root'%(args.tag,args.setname,args.era),'Events',saveRunChain=False)
     
     # Kinematic plots
@@ -100,10 +112,9 @@ def HHstudies(args):
     old_dict = json.load(open(fcutflow_old), object_pairs_hook=OrderedDict)
     for key,v in selection.GetCutflowDict().items():
         if key!= "Initial":
-            # old_dict[key] = v
-            # no gen weight
-            old_dict[key] = v*xsecscale
-
+            #print(selection.a.GetActiveNode().DataFrame.GetColumnNames())
+            old_dict[key] = v*selection.a.GetActiveNode().DataFrame.Mean("weight__nominal").GetValue()
+            #old_dict[key] = v*selection.GetXsecScale()
     out = open('gg_cutflow/%s/%s_%s_cutflow.txt'%(args.tag,args.setname, args.era),'w')
     out.write(json.dumps(old_dict))
     out.close()
@@ -125,6 +136,9 @@ if __name__ == '__main__':
     parser.add_argument('--tag', type=str, dest='tag',
                         action='store', default='test',
                         help='Tag to identify study')
+    parser.add_argument('-m', type=int, dest='mass',
+                        action='store', default=125,
+                        help='Mass')
     args = parser.parse_args()
     args.threads = 1
     HHstudies(args)

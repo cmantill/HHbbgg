@@ -1,5 +1,0 @@
-root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_ZH-HtoBB-ZtoQQ_17_1of5.root
-root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_ZH-HtoBB-ZtoQQ_17_2of5.root
-root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_ZH-HtoBB-ZtoQQ_17_3of5.root
-root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_ZH-HtoBB-ZtoQQ_17_4of5.root
-root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_ZH-HtoBB-ZtoQQ_17_5of5.root

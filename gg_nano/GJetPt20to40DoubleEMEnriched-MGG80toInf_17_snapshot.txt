@@ -1,0 +1,7 @@
+root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_GJetPt20to40DoubleEMEnriched-MGG80toInf_17_1of7.root
+root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_GJetPt20to40DoubleEMEnriched-MGG80toInf_17_2of7.root
+root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_GJetPt20to40DoubleEMEnriched-MGG80toInf_17_3of7.root
+root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_GJetPt20to40DoubleEMEnriched-MGG80toInf_17_4of7.root
+root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_GJetPt20to40DoubleEMEnriched-MGG80toInf_17_5of7.root
+root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_GJetPt20to40DoubleEMEnriched-MGG80toInf_17_6of7.root
+root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_GJetPt20to40DoubleEMEnriched-MGG80toInf_17_7of7.root

@@ -6,6 +6,8 @@ python HHSnapshot.py -s GluGluToRadionToHHTo2B2G-1000 -y 16 -j 1 -n 1
 python HHstudies.py -s GluGluToRadionToHHTo2B2G-1000 -y 16 
 
 python HHSnapshot.py -s NMSSM-XToYHTo2b2g-MX-1000 -y 16 -j 0 -n 1 --ss 100
+
+python HHSnapshot.py -s Data-DoubleEG-RunB -y 17 -j 3 -n 10 --pfnano
 ```
 
 In condor:
