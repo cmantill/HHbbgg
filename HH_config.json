@@ -1,0 +1,37 @@
+{
+    "lumi16":35917.213466,
+    "lumi17":41521.427777,
+    "lumi18":59692.687741,
+    "XSECS":{
+	"GJetsHT100-200": 5000,
+	"GJetsHT200-400": 1079,
+	"GJetsHT400-600": 125.9,
+	"GJetsHT600-Inf": 43.36,
+	"DiPhotonJets-MGG-80toInf": 117.6,
+	"GJet-Pt-20to40-MGG-80toInf": 232.8,
+	"GJet-Pt-20toInf-MGG-40to80": 3216.0,
+	"GJet-Pt-40toInf-MGG-80toInf": 872.8,
+	"QCD-Pt-40ToInf-DoubleEMEnriched-MGG-80ToInf": 118100.0,
+	"QCD-Pt-30to40-DoubleEMEnriched-MGG-80toInf": 22110.0,
+	"QCD-Pt-30toInf-DoubleEMEnriched-MGG-40to80": 241400.0,
+	"WGToLNuG": 463.9,
+	"TTTo2L2Nu": 92.23,
+        "TTToSemiLeptonic": 369.5,
+        "TTToHadronic": 370,
+	"GluGluHToBB-Pt-200ToInf-M-125": 0.274,
+        "VBFHToBB-M-125": 2.25,
+	"WminusH-HToBB-WToQQ-M-125": 0.2135,
+	"WplusH-HToBB-WToQQ-M-125": 0.342,
+	"ZH-HToBB-ZToQQ-M-125": 0.326,
+	"ggZH-HToBB-ZToQQ-M-125": 0.025,
+	"ttHTobb-M125": 0.291,
+	"ttHJetToGG-M125": 0.4793,
+	"VBFHToGG-M125": 3.858,
+	"GluGluHToGG-M125": 31.83,
+	"HHbbgg-cHH1": 0.00008209918
+    },
+    "CUTS":{
+        "XbbvsQCD": 0.8,
+	"deepFlavB": 0.3040
+    }
+}
