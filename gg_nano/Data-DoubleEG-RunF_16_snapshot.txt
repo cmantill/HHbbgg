@@ -1,2 +1,0 @@
-root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_Data-DoubleEG-RunF_16_1of2.root
-root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_Data-DoubleEG-RunF_16_2of2.root

@@ -1,3 +1,0 @@
-root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_Data-DoubleEG-RunBv1HIPM_16_1of3.root
-root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_Data-DoubleEG-RunBv1HIPM_16_2of3.root
-root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_Data-DoubleEG-RunBv1HIPM_16_3of3.root

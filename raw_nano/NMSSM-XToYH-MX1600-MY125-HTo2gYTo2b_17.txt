@@ -1,0 +1,9 @@
+root://cmsxrootd.fnal.gov//store/user/lpcpfnano/cmantill/v2_2/2017/XHYPrivate/NMSSM_XToYH_MX1600_MY125_HTo2gYTo2b/NMSSM_XToYH_MX1600_MY125_HTo2gYTo2b/220623_144806/0000/nano_mc2017_11.root
+root://cmsxrootd.fnal.gov//store/user/lpcpfnano/cmantill/v2_2/2017/XHYPrivate/NMSSM_XToYH_MX1600_MY125_HTo2gYTo2b/NMSSM_XToYH_MX1600_MY125_HTo2gYTo2b/220623_144806/0000/nano_mc2017_12.root
+root://cmsxrootd.fnal.gov//store/user/lpcpfnano/cmantill/v2_2/2017/XHYPrivate/NMSSM_XToYH_MX1600_MY125_HTo2gYTo2b/NMSSM_XToYH_MX1600_MY125_HTo2gYTo2b/220623_144806/0000/nano_mc2017_13.root
+root://cmsxrootd.fnal.gov//store/user/lpcpfnano/cmantill/v2_2/2017/XHYPrivate/NMSSM_XToYH_MX1600_MY125_HTo2gYTo2b/NMSSM_XToYH_MX1600_MY125_HTo2gYTo2b/220623_144806/0000/nano_mc2017_15.root
+root://cmsxrootd.fnal.gov//store/user/lpcpfnano/cmantill/v2_2/2017/XHYPrivate/NMSSM_XToYH_MX1600_MY125_HTo2gYTo2b/NMSSM_XToYH_MX1600_MY125_HTo2gYTo2b/220623_144806/0000/nano_mc2017_17.root
+root://cmsxrootd.fnal.gov//store/user/lpcpfnano/cmantill/v2_2/2017/XHYPrivate/NMSSM_XToYH_MX1600_MY125_HTo2gYTo2b/NMSSM_XToYH_MX1600_MY125_HTo2gYTo2b/220623_144806/0000/nano_mc2017_6.root
+root://cmsxrootd.fnal.gov//store/user/lpcpfnano/cmantill/v2_2/2017/XHYPrivate/NMSSM_XToYH_MX1600_MY125_HTo2gYTo2b/NMSSM_XToYH_MX1600_MY125_HTo2gYTo2b/220623_144806/0000/nano_mc2017_7.root
+root://cmsxrootd.fnal.gov//store/user/lpcpfnano/cmantill/v2_2/2017/XHYPrivate/NMSSM_XToYH_MX1600_MY125_HTo2gYTo2b/NMSSM_XToYH_MX1600_MY125_HTo2gYTo2b/220623_144806/0000/nano_mc2017_8.root
+root://cmsxrootd.fnal.gov//store/user/lpcpfnano/cmantill/v2_2/2017/XHYPrivate/NMSSM_XToYH_MX1600_MY125_HTo2gYTo2b/NMSSM_XToYH_MX1600_MY125_HTo2gYTo2b/220623_144806/0000/nano_mc2017_9.root

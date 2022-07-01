@@ -1,1 +1,0 @@
-{"Initial": 33884844.0, "flags": 33505345.0, "nphotons": 17060401.0, "njets": 4084293.0, "fatjet_kin": 117160.0, "fatjet_xbb": 2130.0, "diphoton_kin": 73.0, "diphoton_eveto": 41.0, "ptphoton_over_mgg": 41.0, "metcut": 41.0, "photonsawayjet": 45.37975710399999, "nobtagsaway": 45.37975710399999, "SelFatJet_Xbb_tight": 45.37975710399999, "mbb_veto": 13.613927131199999}

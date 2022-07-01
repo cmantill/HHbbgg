@@ -1,4 +1,0 @@
-root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_GJetPt40toInfDoubleEMEnriched-MGG80toInf_17_1of4.root
-root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_GJetPt40toInfDoubleEMEnriched-MGG80toInf_17_2of4.root
-root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_GJetPt40toInfDoubleEMEnriched-MGG80toInf_17_3of4.root
-root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/HHsnapshot_GJetPt40toInfDoubleEMEnriched-MGG80toInf_17_4of4.root

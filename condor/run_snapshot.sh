@@ -22,8 +22,8 @@ cd TIMBER
 source setup.sh
 cd ../HHbbgg
 
-echo python HHSnapshot.py $*
-python HHSnapshot.py $*
+echo python HH_snapshot.py $*
+python HH_snapshot.py $*
 
 xrdcp -f HHsnapshot_*.root root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/snapshots/
 xrdcp -f HHcutflow_*.txt root://cmseos.fnal.gov//store/user/cmantill/HHbbgg/cutflows/
