@@ -1,98 +1,50 @@
-import glob,os
+import glob,os,argparse
 
-# a.k.a. UL v9 or pfnano
-pfnano = [
-    # "NMSSM-XToYHTo2g2b-MX-1200MY10",
-    # "NMSSM-XToYHTo2g2b-MX-1200MY20",
-    # "NMSSM-XToYHTo2g2b-MX-1200MY40",
-    # "NMSSM-XToYHTo2g2b-MX-1200MY60",
-    # "NMSSM-XToYHTo2g2b-MX-1200MY125",
-    # "NMSSM-XToYHTo2g2b-MX-1200MY250",
-    # "NMSSM-XToYHTo2g2b-MX-1200MY300",
-    # "NMSSM-XToYHTo2g2b-MX-1200MY400",
-    # "NMSSM-XToYHTo2g2b-MX-2000MY5",
-    # "NMSSM-XToYHTo2g2b-MX-2000MY10",
-    # "NMSSM-XToYHTo2g2b-MX-2000MY30",
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--year', dest='year', default='17', help='year split by commas')
+    parser.add_argument('--files_per_job',dest='files_per_job', default=20, help='files per job')
+    parser.add_argument('--samples',dest='samples',default=None,help='specify samples')
+    parser.add_argument('--samplekey',dest='samplekey',default=None,help='specify matching sample key')
+    parser.add_argument("--submit",dest='submit',action='store_true',help="submit jobs when created")
+    args = parser.parse_args()
 
-    "NMSSM-XToYHTo2g2b-MX-1000MY800",
-    "NMSSM-XToYHTo2g2b-MX-1000MY125",
-    "NMSSM-XToYHTo2g2b-MX-1000MY60",
-    "NMSSM-XToYHTo2g2b-MX-1000MY250",
-    "NMSSM-XToYHTo2g2b-MX-700MY60",
-    "NMSSM-XToYHTo2g2b-MX-700MY125",
-    "NMSSM-XToYHTo2g2b-MX-2000MY60",
-    "NMSSM-XToYHTo2g2b-MX-2000MY800",
-    "NMSSM-XToYHTo2g2b-MX-2000MY250",
-    "NMSSM-XToYHTo2g2b-MX-1400MY60",
-    "NMSSM-XToYHTo2g2b-MX-1400MY500",
+    outdir = f"/store/user/cmantill/HHbbgg/{args.tag}/"
 
-    "HHbbgg-cHH1",
+    oname = 'condor/snapshot_args.txt'
+    out = open(oname,'w')
+    for year in args.year.split(','):
+        for f in glob.glob(f'raw_nano/*_{year}.txt'):
+            if os.path.getsize(f) == 0:
+                print(f'File {f} is empty... Skipping.')
+                continue
+            filename = f.split('/')[-1].split('.')[0]
+            setname = filename.split('_')[0]
+            if args.samples is not None:
+                if setname not in args.samples.split(','):
+                    continue
+            if args.samplekey is not None:
+                if args.samplekey not in setname:
+                    continue
 
-    "TTTo2L2Nu",
-    "TTToSemiLeptonic",
-    "TTToHadronic",
+            nfiles = len(open(f,'r').readlines())
+            njobs = int(nfiles/args.files_per_job)             
+            for i in range(1,njobs+1):
+                out.write(f'-s {setname} -y {year} -j {i} -n {njobs} \n')
+    out.close()
 
-    "DiPhotonJets-MGG-80toInf",
-    "GJetPt20to40DoubleEMEnriched-MGG80toInf",
-    "GJetPt40toInfDoubleEMEnriched-MGG80toInf",
-    "GJetsHT100-200",
-    "GJetsHT200-400",
-    "GJetsHT400-600",
-    "GJetsHT600-Inf",
+    sh_templ_file = open(f"condor/run_snapshot.sh")
+    localsh = f"condor/run_snapshot_{args.tag}.sh"
+    sh_file = open(localsh, "w")
+    for line in sh_templ_file:
+        line = line.replace("DIRECTORY", outdir)
+        sh_file.write(line)
+    sh_file.close()
+    sh_templ_file.close()
 
-    "Data-DoubleEG-RunB",
-    "Data-DoubleEG-RunC",
-    "Data-DoubleEG-RunD",
-    "Data-DoubleEG-RunE",
-    "Data-DoubleEG-RunF",
-
-    "Data-DoubleEG-RunBv1HIPM",
-    "Data-DoubleEG-RunBv2HIPM",
-    "Data-DoubleEG-RunCHIPM",
-    "Data-DoubleEG-RunDHIPM",
-    "Data-DoubleEG-RunEHIPM",
-    "Data-DoubleEG-RunFHIPM",
-    "Data-DoubleEG-RunG",
-    "Data-DoubleEG-RunH",
-
-    "Data-EGamma-RunA",
-    "Data-EGamma-RunB",
-    "Data-EGamma-RunC",
-    "Data-EGamma-RunD",
-]
-
-oname = 'condor/snapshot_args.txt'
-out = open(oname,'w')
-years = ["17"]
-#years = ["16","18"]
-
-for f in glob.glob('raw_nano/*.txt'):
-    if os.path.getsize(f) == 0:
-        print ('File %s is empty... Skipping.'%(f))
-        continue
-    filename = f.split('/')[-1].split('.')[0]
-    nfiles = len(open(f,'r').readlines())
-    setname = filename.split('_')[0]
-    year = filename.split('_')[1]
-    if year not in years: 
-        print(year,f)
-        continue
-
-    #if 'NMSSM' in setname or 'HHbbgg' in setname:
-    #    njobs = 1
-    #else:
-    njobs = int(nfiles/20) 
-
-    print(setname)
-    for i in range(1,njobs+1):
-        #if setname in pfnano:
-        #if ('TTTo' not in setname) and ('GJetPt' not in setname) and ('DiPhoton' not in setname): continue
-        #if ('Data' not in setname) and ('NMSSM' not in setname) and ('HHbbgg' not in setname): continue
-        #if ('HHbbgg' not in setname) and ('GJets' not in setname): continue
-        if ('NMSSM' not in setname and 'XHY' not in setname): continue
-        out.write('-s %s -y %s -j %s -n %s --pfnano \n'%(setname,year,i,njobs))
-        #else:
-        #continue
-        #out.write('-s %s -y %s -j %s -n %s \n'%(setname,year,i,njobs))
-
-out.close()
+    if args.submit:
+        os.system(f"mkdir -p /eos/uscms/{outdir}")
+        os.system(f"mkdir -p /eos/uscms/{outdir}/snapshots/")
+        os.system(f"mkdir -p /eos/uscms/{outdir}/cutflows/")
+        cmd = f'python CondorHelper.py -r {localsh} -a {oname} -i "HHClass.py HHSnapshot.py helpers.py"'
+        os.system(cmd)
