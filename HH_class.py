@@ -8,18 +8,13 @@ CompileCpp("TIMBER/Framework/include/common.h")
 CompileCpp('HH_modules.cc')
 
 class HHClass:
-    def __init__(self,inputfile,year,ijob,njobs,multiSampleStr=''):
+    def __init__(self,inputfile,year,ijob,njobs,mh=125,silent=False):
         if inputfile.endswith('.txt'): 
             infiles = SplitUp(inputfile, njobs)[ijob-1]
         else:
             infiles = inputfile
-        print(infiles)
-        if multiSampleStr!='':
-            self.multiSampleStr = multiSampleStr
-            self.a = analyzer(infiles,multiSampleStr=multiSampleStr)
-        else:
-            self.multiSampleStr = None
-            self.a = analyzer(infiles)
+        # print(infiles)
+        self.a = analyzer(infiles,silent=True)
 
         if inputfile.endswith('.txt'):
             self.setname = inputfile.split('/')[-1].split('_')[0]
@@ -30,7 +25,7 @@ class HHClass:
         self.njobs = njobs
         self.config = OpenJSON('HH_config.json')
         self.cuts = self.config['CUTS']
-        self.mh = 125
+        self.mh = mh
         self.trigs = {
             16:[
                 'HLT_Diphoton30_18_R9Id_OR_IsoCaloId_AND_HE_R9Id_Mass90',
@@ -59,10 +54,7 @@ class HHClass:
         # fatjets
         # use v9 version of PN names
         self.a.Define('FatJet_Xbb','(FatJet_particleNetMD_Xbb/(1-FatJet_particleNetMD_Xcc-FatJet_particleNetMD_Xqq))')
-        try:
-            self.a.Define('FatJet_mreg','FatJet_particleNet_mass')
-        except:
-            self.a.Define('FatJet_mreg', 'FatJet_msoftdrop')
+        self.a.Define('FatJet_mreg','FatJet_particleNet_mass')
 
         # objects
         self.a.SubCollection('SelFatJet','FatJet', 
@@ -86,14 +78,14 @@ class HHClass:
         # photons
         self.a.Define('lead_photon', "hardware::TLvector(SelPhoton_pt[0],SelPhoton_eta[0],SelPhoton_phi[0],0)")
         self.a.Define('sublead_photon', "hardware::TLvector(SelPhoton_pt[1],SelPhoton_eta[1],SelPhoton_phi[1],0)")
+        self.a.Define("mgg", "hardware::InvariantMass({lead_photon,sublead_photon})")
         diphoton_kin = 'SelPhoton_pt[0]>30 && abs(SelPhoton_eta[0])<2.5 && (abs(SelPhoton_eta[0])<1.442 || abs(SelPhoton_eta[0])>1.556) '
         diphoton_kin += ' && SelPhoton_r9[0]>0.8 && SelPhoton_sieie[0]<0.035 && SelPhoton_hoe[0]<0.08 && SelPhoton_mvaID[0]>-0.9'
         diphoton_kin += ' && SelPhoton_pt[1]>20 && abs(SelPhoton_eta[1])<2.5 && (abs(SelPhoton_eta[1])<1.442 || abs(SelPhoton_eta[1])>1.556)'
         diphoton_kin += ' && SelPhoton_r9[1]>0.8 && SelPhoton_sieie[1]<0.035 && SelPhoton_hoe[1]<0.08 && SelPhoton_mvaID[1]>-0.9'
+        diphoton_kin += ' && (SelPhoton_pt[0]/mgg > 1/3) && (SelPhoton_pt[1]/mgg > 1/4)'
         self.a.Cut('diphoton_kin',diphoton_kin)
         self.a.Cut('diphoton_eveto', 'SelPhoton_electronVeto[0]==1 && SelPhoton_electronVeto[1]==1')
-        self.a.Define("mgg", "hardware::InvariantMass({lead_photon,sublead_photon})")
-        self.a.Cut("ptphoton_over_mgg", "(SelPhoton_pt[0]/mgg > 1/3) && (SelPhoton_pt[1]/mgg > 1/4)")
 
         # met
         self.a.Define('metpt', 'MET_pt')
@@ -130,8 +122,8 @@ class HHClass:
             'JetAwayFatJet_index',
             'SelPhoton_pt','SelPhoton_eta','SelPhoton_phi','SelPhoton_mvaID','SelPhoton_energyErr',
             'HLT_Diphoton*',
-            'SelElectron_pt','SelElectron_eta','SelElectron_phi',
-            'SelMuon_pt','SelMuon_eta','SelMuon_phi',
+            'nSelElectron','SelElectron_pt','SelElectron_eta','SelElectron_phi',
+            'nSelMuon','SelMuon_pt','SelMuon_eta','SelMuon_phi',
             'metpt','metphi',
             'event', 'eventWeight', 'luminosityBlock', 'run'
         ]
@@ -139,15 +131,12 @@ class HHClass:
         if not self.a.isData:
             columns.extend(['genWeight'])
         self.a.SetActiveNode(node)
-        if self.multiSampleStr:
-            self.a.Snapshot(columns,'HHsnapshot_%sMY%s_%s_%sof%s.root'%(self.setname,self.multiSampleStr,self.year,self.ijob,self.njobs),'Events',saveRunChain=True)
-        else:
-            self.a.Snapshot(columns,'HHsnapshot_%s_%s_%sof%s.root'%(self.setname,self.year,self.ijob,self.njobs),'Events',saveRunChain=True)
+        self.a.Snapshot(columns,'HHsnapshot_%s_%s_%sof%s.root'%(self.setname,self.year,self.ijob,self.njobs),'Events',saveRunChain=True)
         self.a.SetActiveNode(startNode)
 
     def GetXsecScale(self):
         lumi = self.config['lumi%s'%self.year]
-        if 'NMSSM' in self.setname:
+        if 'NMSSM' in self.setname or 'XHY-' in self.setname:
             xsec = 0.001
         else:
             xsec = self.config['XSECS'][self.setname]
@@ -165,7 +154,7 @@ class HHClass:
     def GetCutflowDict(self):
         return CutflowDict(self.a.GetActiveNode())
 
-    def Selection(self,xbbcut=0.9):
+    def Selection(self,xbb_cut=0.9):
         self.OpenForSelection()
         try:
             self.a.Define('lead_photon', "hardware::TLvector(SelPhoton_pt[0],SelPhoton_eta[0],SelPhoton_phi[0],0)")
@@ -180,11 +169,11 @@ class HHClass:
         self.a.Define("p0_mva", "SelPhoton_mvaID[0]")
         self.a.Define("p1_mva", "SelPhoton_mvaID[1]")
 
-        self.a.Define("fatjet", "hardware::TLvector(SelFatJet_pt[fatjet_index],SelFatJet_eta[fatjet_index],SelFatJet_phi[fatjet_index],SelFatJet_msoftdrop[fatjet_index])")
+        self.a.Define("fatjet", "hardware::TLvector(SelFatJet_pt[fatjet_index],SelFatJet_eta[fatjet_index],SelFatJet_phi[fatjet_index],SelFatJet_mreg[fatjet_index])")
         self.a.Define("ptj", "SelFatJet_pt[fatjet_index]")
         self.a.Define("mreg", "SelFatJet_mreg[fatjet_index]")
-        self.a.Define("mjet", "SelFatJet_msoftdrop[fatjet_index]")
-        self.a.Define("pt0_over_mj", "SelFatJet_pt[fatjet_index]/mjet")
+        self.a.Define("msd", "SelFatJet_msoftdrop[fatjet_index]")
+        self.a.Define("pt0_over_mj", "SelFatJet_pt[fatjet_index]/mreg")
 
         self.a.Define('bjet', 'hardware::TLvector(SelJet_pt[JetAwayFatJet_index],SelJet_eta[JetAwayFatJet_index],SelJet_phi[JetAwayFatJet_index],SelJet_mass[JetAwayFatJet_index])')
         self.a.Define('deltaR_bjet_fatjet','hardware::DeltaR(fatjet,bjet)')
@@ -199,7 +188,7 @@ class HHClass:
         self.a.Define("met", "metpt")
 
         self.a.Define("invm", "hardware::InvariantMass({fatjet,lead_photon,sublead_photon})")
-        self.a.Define("redm", "invm-mjet-mgg+{0}".format(self.mh))
+        self.a.Define("fourm", "invm-mreg-mgg+125+{0}".format(self.mh))
         self.a.Define("ptgg_over_inv", "(lead_photon+sublead_photon).Pt()/invm")
         self.a.Define("ptj_over_inv", "SelFatJet_pt[fatjet_index]/invm")
         
@@ -209,5 +198,18 @@ class HHClass:
         self.a.Cut("nobtagsaway", "bscore_jetaway < 0.340")
 
         # Final cuts
-        self.a.Cut("SelFatJet_Xbb",f"SelFatJet_Xbb[0]>{xbbcut}")
-        self.a.Cut("mbb_window", "SelFatJet_msoftdrop[fatjet_index]>90 && SelFatJet_msoftdrop[fatjet_index]<140")
+        self.a.Cut("SelFatJet_Xbb","SelFatJet_Xbb[0]>%.2f"%xbb_cut)
+        self.a.Cut("mbb_window", "SelFatJet_mreg[fatjet_index]>90 && SelFatJet_mreg[fatjet_index]<140")
+
+        # Weights        
+        try:
+            self.a.MakeWeightCols(extraNominal='' if self.a.isData else 'genWeight*%s'%self.GetXsecScale())
+        except:
+            print('no xsec for %s'%self.setname)
+            exit(1)
+
+    def TemplateSnapshot(self,output_dir,oname):
+        self.a.Snapshot(["mreg","msd","deta_p0_p1","dphi_p0_p1","dr_p0_p1","mgg","fourm","weight__nominal",],
+                        '%s/%s.root'%(output_dir,oname),
+                        'Events',saveRunChain=False)
+        

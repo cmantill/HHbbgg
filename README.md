@@ -44,3 +44,4 @@ python gg_nano/get_all.py
 python gg_cutflow/get_all.py
 ```
 
+python gg_nano/get_all.py --idir /store/user/cmantill/HHbbgg/Jun28/ --odir Jun28
