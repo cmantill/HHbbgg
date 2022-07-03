@@ -21,6 +21,8 @@ def get_subfolders(parent):
 folders_to_index = [
 	"/store/user/lpcpfnano/cmantill/v2_2/2017/XHYPrivate",
         "/store/user/lpcpfnano/cmantill/v2_2/2017/GJets",
+        "/store/user/lpcpfnano/cmantill/v2_3/2017/HH",
+        "/store/user/lpcpfnano/cmantill/v2_2/2017/QCD",
 ]
 
 for pyear in ["2017"]:

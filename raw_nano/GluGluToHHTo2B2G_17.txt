@@ -1,0 +1,1 @@
+root://cmsxrootd.fnal.gov//store/user/lpcpfnano/cmantill/v2_3/2017/HH/GluGluToHHTo2B2G_node_1_13TeV-madgraph_TuneCP5_13TeV-pythia8/GluGluToHHTo2B2G/220701_220543/0000/nano_mc2017_1.root
