@@ -13,11 +13,18 @@ def HHstudies(args):
     print ('PROCESSING: %s %s'%(args.setname, args.era))
     ROOT.ROOT.EnableImplicitMT(args.threads)
 
+    import json
+    fcutflow_old = "gg_nano/%s/cutflows/%s_%s.txt"%(args.tag,args.setname, args.era)
+    cutflow_dict = json.load(open(fcutflow_old), object_pairs_hook=OrderedDict)
+    if cutflow_dict["diphoton_eveto"]<=0:
+        print(cutflow_dict["diphoton_eveto"])
+        return
+
     mh = 125
     if 'NMSSM' in args.setname:
         mh = int(args.setname.split('-')[3].replace('MY',''))
     if 'XHY-' in args.setname:
-        mh = int(args.setname.split('-')[2].replace('my',''))
+        mh = int(args.setname.split('-')[2].replace('my',''))    
 
     start = time.time()
     # Base setup

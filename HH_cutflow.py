@@ -4,7 +4,7 @@ from TIMBER.Analyzer import HistGroup, Correction
 from TIMBER.Tools.Common import CompileCpp
 ROOT.gROOT.SetBatch(True)
 
-import os
+import os,json
 
 from HH_class import HHClass
 from collections import OrderedDict
@@ -12,6 +12,12 @@ from collections import OrderedDict
 def HHcutflow(args):
     print ('PROCESSING: %s %s'%(args.setname, args.era))
     ROOT.ROOT.EnableImplicitMT(args.threads)
+
+    fcutflow_old = "gg_nano/%s/cutflows/%s_%s.txt"%(args.tag,args.setname, args.era)
+    cutflow_dict = json.load(open(fcutflow_old), object_pairs_hook=OrderedDict)
+    if cutflow_dict["diphoton_eveto"]<=0:
+        print(cutflow_dict["diphoton_eveto"])
+        return None
 
     mh = 125
     if 'NMSSM' in args.setname:
@@ -23,7 +29,6 @@ def HHcutflow(args):
     hh.Selection(xbb_cut=0.9)
     xweight = hh.a.GetActiveNode().DataFrame.Mean("weight__nominal").GetValue()
 
-    import json
     fcutflow_old = "gg_nano/%s/cutflows/%s_%s.txt"%(args.tag,args.setname, args.era)
     old_dict = json.load(open(fcutflow_old), object_pairs_hook=OrderedDict)
     for key,value in old_dict.items():
@@ -64,7 +69,7 @@ if __name__ == '__main__':
         print(nset)
         args.setname = nset
         cutflow_dict = HHcutflow(args)
-        print(cutflow_dict)
-        efficiencies[nset] = cutflow_dict['sel-mbb_window']/cutflow_dict['Initial']
+        if cutflow_dict is not None:
+            efficiencies[nset] = cutflow_dict['sel-mbb_window']/cutflow_dict['Initial']
 
     print(efficiencies)

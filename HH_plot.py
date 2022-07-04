@@ -16,6 +16,11 @@ CommonSets = {
                      "DiPhotonJets-MGG-80toInf"
                  ],
              ],
+    "GJets": [ROOT.kRed-7,
+              [
+                  "GJet-Pt-40toInf-MGG-80toInf",
+              ],
+          ],
 }
 colorsignal = {
     'MX700': ROOT.kBlue,
@@ -36,8 +41,8 @@ def GetProcYearFromROOT(filename):
     pieces = filename.split('/')[-1].split('.')[0].split('_')
     return pieces[1], pieces[2]
 
-def multicore(tag,files=[],doStudies=True):
-    pool = multiprocessing.Pool(processes=4 if doStudies else 6,maxtasksperchild=1)
+def multicore(tag,files=[]):
+    pool = multiprocessing.Pool(processes=1,maxtasksperchild=1)
     nthreads = 1
     process_args = []
     for f in files:
@@ -66,7 +71,10 @@ def GetHistDict(histname, all_files):
     }
     for f in all_files:
         proc, year = GetProcYearFromROOT(f)
-        tfile = ROOT.TFile.Open(f)
+        try:
+            tfile = ROOT.TFile.Open(f)
+        except:
+            print('%s empty'%f)
         hist = tfile.Get(histname)
         if hist == None:
             raise ValueError('Histogram %s does not exist in %s.'%(histname,f))
@@ -119,13 +127,12 @@ if __name__ == '__main__':
 
     for mx,keys in to_color.items():
         for i,key in enumerate(keys):
-            colors[key] =colorsignal[mx]+i
-            
+            colors[key] =colorsignal[mx]+i            
 
     combine = False
     if not args.recycle:
         snapshot_files = ["gg_nano/%s/snapshots/%s_%s.txt"%(args.tag,s,year) for s in sets]
-        multicore(args.tag,snapshot_files,doStudies=True) 
+        multicore(args.tag,snapshot_files)
         combine = True
         
     common_sets,remove_sets = CombineCommonSets(args.tag,year,combine)

@@ -199,7 +199,7 @@ class HHClass:
 
         # Final cuts
         self.a.Cut("SelFatJet_Xbb","SelFatJet_Xbb[0]>%.2f"%xbb_cut)
-        self.a.Cut("mbb_window", "SelFatJet_mreg[fatjet_index]>90 && SelFatJet_mreg[fatjet_index]<140")
+        self.a.Cut("mbb_window", "SelFatJet_msoftdrop[fatjet_index]>90 && SelFatJet_msoftdrop[fatjet_index]<140")
 
         # Weights        
         try:
