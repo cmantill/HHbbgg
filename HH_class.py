@@ -198,7 +198,7 @@ class HHClass:
         self.a.Cut("nobtagsaway", "bscore_jetaway < 0.340")
 
         # Final cuts
-        self.a.Cut("SelFatJet_Xbb","SelFatJet_Xbb[0]>%.2f"%xbb_cut)
+        self.a.Cut("SelFatJet_Xbb","SelFatJet_Xbb[fatjet_index]>%.2f"%xbb_cut)
         self.a.Cut("mbb_window", "SelFatJet_msoftdrop[fatjet_index]>90 && SelFatJet_msoftdrop[fatjet_index]<140")
 
         # Weights        
@@ -207,6 +207,58 @@ class HHClass:
         except:
             print('no xsec for %s'%self.setname)
             exit(1)
+
+    def ROCSnapshot(self,output_dir,oname,match=False,matchH=False):
+        self.OpenForSelection()
+        try:
+            self.a.Define('lead_photon', "hardware::TLvector(SelPhoton_pt[0],SelPhoton_eta[0],SelPhoton_phi[0],0)")
+        except:
+            return None
+        self.a.Define("sublead_photon", "hardware::TLvector(SelPhoton_pt[1],SelPhoton_eta[1],SelPhoton_phi[1],0)")
+
+        clist = [
+            "mreg","msd","xbb","tau_matchidx","ele_matchidx","signal_label","bkg_label",
+            "my","mx","mgg"
+            # BDT variables
+        ]
+
+        self.a.Define("mreg","SelFatJet_mreg[0]")
+        self.a.Define("msd","SelFatJet_msoftdrop[0]")
+        self.a.Define("xbb","SelFatJet_Xbb[0]")
+
+        self.a.Define("fatjet", "hardware::TLvector(SelFatJet_pt[0],SelFatJet_eta[0],SelFatJet_phi[0],SelFatJet_mreg[0])")
+        self.a.Define("gg", "lead_photon+sublead_photon")
+        self.a.Define("genparts", "hardware::TLvector(GenPart_pt,GenPart_eta,GenPart_phi,GenPart_mass)")
+        self.a.Define("h_matchidx","MatchToGen(25,gg,genparts,GenPart_pdgId,GenPart_status,0.8,22)")
+        if matchH:
+            self.a.Define("y_matchidx","MatchToGen(25,fatjet,genparts,GenPart_pdgId,GenPart_status,0.8,22)")
+        else:
+            self.a.Define("y_matchidx","MatchToGen(35,fatjet,genparts,GenPart_pdgId,GenPart_status,0.8,22)")
+        self.a.Define("x_matchidx","MatchToGen(45,fatjet,genparts,GenPart_pdgId,GenPart_status,0.8,22)")
+        self.a.Define("tau_matchidx","MatchToGen(15,gg,genparts,GenPart_pdgId,GenPart_status,0.8,1)")
+        self.a.Define("ele_matchidx","MatchToGen(11,gg,genparts,GenPart_pdgId,GenPart_status,0.8,1)")
+        self.a.Define("mgg", "hardware::InvariantMass({lead_photon,sublead_photon})")
+
+        if match or matchH:
+            clist.extend(["hggpt","ybbpt"])
+            self.a.Define("hggpt","GenPart_pt[h_matchidx]")
+            self.a.Define("ybbpt","GenPart_pt[y_matchidx]")
+            self.a.Define("my","GenPart_mass[y_matchidx]")
+            self.a.Define("mx","GenPart_mass[x_matchidx]")
+            self.a.Cut("my_match","y_matchidx>-1")
+            self.a.Define("signal_label","ReturnOne()")
+            self.a.Define("bkg_label","ReturnZero()")
+        else:
+            self.a.Define("signal_label","ReturnZero()")
+            self.a.Define("bkg_label","ReturnOne()")
+            self.a.Define("my","ReturnZero()")
+            self.a.Define("mx","ReturnZero()")
+        self.a.Snapshot(
+            clist,            
+            '%s/%s.root'%(output_dir,oname),
+            "Events",saveRunChain=False
+        )
+
 
     def TemplateSnapshot(self,output_dir,oname):
         self.a.Snapshot(["mreg","msd","deta_p0_p1","dphi_p0_p1","dr_p0_p1","mgg","fourm","weight__nominal",],

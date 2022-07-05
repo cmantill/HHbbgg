@@ -12,6 +12,7 @@ def main(args):
         files = json.load(f)
         for subdir in files[year]:
             for key, flist in files[year][subdir].items():
+                if 'HTo2gYTo2b' in key: continue
                 fileset[key] = ["root://cmsxrootd.fnal.gov/" + f for f in flist]
 
     for key,flist in fileset.items():

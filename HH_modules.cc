@@ -60,10 +60,13 @@ int MatchToGen(int pdgID,
 	       ROOT::Math::PtEtaPhiMVector obj,
 	       RVec<ROOT::Math::PtEtaPhiMVector> GenPart_vect,
 	       RVec<int> GenPart_pdgId,
-	       float dR=0.8) {
+	       RVec<int> GenPart_status,
+	       float dR=0.8,
+	       int status=22
+	       ) {
   int idx=-1;
   for (int igp = 0; igp<GenPart_vect.size(); igp++) {
-    if (abs(GenPart_pdgId[igp]) == pdgID) {
+    if (abs(GenPart_pdgId[igp]) == pdgID && GenPart_status[igp]==status) {
       if (hardware::DeltaR(obj,GenPart_vect[igp]) < dR) {
 	idx=igp;
 	break;
@@ -71,4 +74,11 @@ int MatchToGen(int pdgID,
     }
   }
   return idx;
+}
+
+int ReturnOne() {
+  return 1;
+}
+int ReturnZero() {
+  return 0;
 }

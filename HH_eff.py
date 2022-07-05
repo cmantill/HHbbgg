@@ -6,16 +6,16 @@ plt.rcParams.update({'font.size': 32})
 import argparse,json
 from collections import OrderedDict
 
-def plot_eff(x,ydict,name,labels,ylim=0.001):
+def plot_eff(x,ydict,name,labels,ylim=[0.001,1],tag='Signal eff.'):
     fig, axs = plt.subplots(1,1,figsize=(10,8))
     for key in ydict.keys():
         axs.plot(x,ydict[key].values(),marker='o',label=labels[key])
     axs.legend()
     for tick in axs.get_xticklabels():
         tick.set_rotation(70)
-    axs.set_ylabel('Signal efficiency')
+    axs.set_ylabel(f'{tag}')
     axs.set_yscale('log')
-    axs.set_ylim(ylim,1)
+    axs.set_ylim(ylim[0],ylim[1])
     fig.tight_layout()
     fig.savefig(f'eff/{name}.png')
 
@@ -113,8 +113,10 @@ if __name__ == "__main__":
     }
     for bkg,bkgset in grp_bkg.items():
         eff = {}
+        eyield = {}
         for iset in bkgset:
             eff[iset] = {}
+            eyield[iset] = {}
             fcutflow = f"{cutflow_path}/{iset}_{era}.txt"
             old_dict = json.load(open(fcutflow), object_pairs_hook=OrderedDict)
             for cut,cdict in cuts.items():
@@ -124,6 +126,11 @@ if __name__ == "__main__":
                     eff[iset][cut] = old_dict[dcut]/old_dict['Initial']
                 except:
                     eff[iset][cut] = 0.0
+                if dcut+'-weight' in old_dict.keys():
+                    eyield[iset][cut] = old_dict[dcut+'-weight']
+                else:
+                    eyield[iset][cut] = 0.0
         x = list(cuts.keys())
-        print(bkg,eff)
-        plot_eff(x,eff,f"eff_{bkg}",labels,ylim=0.000001)
+        plot_eff(x,eff,f"eff_{bkg}",labels,ylim=[1e-7,1],tag='Bkg. eff.')
+        print(eyield)
+        plot_eff(x,eyield,f"yield_{bkg}",labels,ylim=[1e-3,10000],tag='Bkg. yield')

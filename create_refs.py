@@ -26,6 +26,10 @@ for mx,mys in other_sig_dict.items():
         sig_str = "XHY-mx%s-my%s"%(mx,my)
         other_signal_sets.append(sig_str)
 
+nonres_signal = [
+    "GluGluToHHTo2B2G"
+]
+
 bkg_sets = [
     "GJet-Pt-20to40-MGG-80toInf",
     "GJet-Pt-20toInf-MGG-40to80",
@@ -48,6 +52,7 @@ bkg_sets = [
 
 sets = []
 sets.extend(signal_sets)
+sets.extend(nonres_signal)
 # sets.extend(other_signal_sets)
 sets.extend(bkg_sets)
 

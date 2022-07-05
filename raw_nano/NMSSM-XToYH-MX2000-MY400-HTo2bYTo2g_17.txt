@@ -1,0 +1,7 @@
+root://cmsxrootd.fnal.gov//store/user/lpcpfnano/cmantill/v2_2/2017/XHYPrivate/NMSSM_XToYH_MX2000_MY400_HTo2bYTo2g/NMSSM_XToYH_MX2000_MY400_HTo2bYTo2g/PrivateMC/220705_021011/0000/nanov9_131.root
+root://cmsxrootd.fnal.gov//store/user/lpcpfnano/cmantill/v2_2/2017/XHYPrivate/NMSSM_XToYH_MX2000_MY400_HTo2bYTo2g/NMSSM_XToYH_MX2000_MY400_HTo2bYTo2g/PrivateMC/220705_021011/0000/nanov9_132.root
+root://cmsxrootd.fnal.gov//store/user/lpcpfnano/cmantill/v2_2/2017/XHYPrivate/NMSSM_XToYH_MX2000_MY400_HTo2bYTo2g/NMSSM_XToYH_MX2000_MY400_HTo2bYTo2g/PrivateMC/220705_021011/0000/nanov9_133.root
+root://cmsxrootd.fnal.gov//store/user/lpcpfnano/cmantill/v2_2/2017/XHYPrivate/NMSSM_XToYH_MX2000_MY400_HTo2bYTo2g/NMSSM_XToYH_MX2000_MY400_HTo2bYTo2g/PrivateMC/220705_021011/0000/nanov9_134.root
+root://cmsxrootd.fnal.gov//store/user/lpcpfnano/cmantill/v2_2/2017/XHYPrivate/NMSSM_XToYH_MX2000_MY400_HTo2bYTo2g/NMSSM_XToYH_MX2000_MY400_HTo2bYTo2g/PrivateMC/220705_021011/0000/nanov9_138.root
+root://cmsxrootd.fnal.gov//store/user/lpcpfnano/cmantill/v2_2/2017/XHYPrivate/NMSSM_XToYH_MX2000_MY400_HTo2bYTo2g/NMSSM_XToYH_MX2000_MY400_HTo2bYTo2g/PrivateMC/220705_021011/0000/nanov9_142.root
+root://cmsxrootd.fnal.gov//store/user/lpcpfnano/cmantill/v2_2/2017/XHYPrivate/NMSSM_XToYH_MX2000_MY400_HTo2bYTo2g/NMSSM_XToYH_MX2000_MY400_HTo2bYTo2g/PrivateMC/220705_021011/0000/nanov9_144.root
